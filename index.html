@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Solar System — NAKUL</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         LOADING SCREEN
+    ====================================================== -->
+
+    <div id="loadingScreen">
+
+        <div class="loader-orbit">
+            <div class="loader-planet"></div>
+        </div>
+
+        <div class="loading-title">
+            SOLAR SYSTEM
+        </div>
+
+        <div class="loading-subtitle">
+            INITIALIZING CELESTIAL ENGINE
+        </div>
+
+        <div class="loading-bar">
+            <div id="loadingProgress"></div>
+        </div>
+
+        <div id="loadingText">
+            Preparing simulation...
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         3D CANVAS
+    ====================================================== -->
+
+    <canvas id="space"></canvas>
+
+
+    <!-- =====================================================
+         TOP NAVIGATION
+    ====================================================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                N
+            </div>
+
+            <div>
+                <div class="brand-name">
+                    SOLAR SYSTEM
+                </div>
+
+                <div class="brand-sub">
+                    INTERACTIVE OBSERVATORY
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="top-status">
+
+            <span class="status-dot"></span>
+
+            <span id="systemStatus">
+                SYSTEM ONLINE
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         LEFT PLANET NAVIGATION
+    ====================================================== -->
+
+    <aside class="planet-nav">
+
+        <div class="panel-heading">
+            CELESTIAL BODIES
+        </div>
+
+        <div id="planetButtons"></div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         PLANET INFORMATION PANEL
+    ====================================================== -->
+
+    <section
+        id="infoPanel"
+        class="info-panel hidden"
+    >
+
+        <button
+            id="closeInfo"
+            class="close-button"
+        >
+            ×
+        </button>
+
+        <div class="info-kicker">
+            PLANETARY PROFILE
+        </div>
+
+        <h1 id="infoName">
+            EARTH
+        </h1>
+
+        <div
+            id="infoType"
+            class="planet-type"
+        >
+            TERRESTRIAL PLANET
+        </div>
+
+
+        <div class="info-divider"></div>
+
+
+        <div class="info-grid">
+
+            <div class="stat">
+                <span>DIAMETER</span>
+                <strong id="infoDiameter">—</strong>
+            </div>
+
+            <div class="stat">
+                <span>ORBIT</span>
+                <strong id="infoOrbit">—</strong>
+            </div>
+
+            <div class="stat">
+                <span>DAY</span>
+                <strong id="infoRotation">—</strong>
+            </div>
+
+            <div class="stat">
+                <span>GRAVITY</span>
+                <strong id="infoGravity">—</strong>
+            </div>
+
+            <div class="stat">
+                <span>TEMP.</span>
+                <strong id="infoTemperature">—</strong>
+            </div>
+
+            <div class="stat">
+                <span>MOONS</span>
+                <strong id="infoMoons">—</strong>
+            </div>
+
+        </div>
+
+
+        <div class="info-description">
+            <div class="description-label">
+                DESCRIPTION
+            </div>
+
+            <p id="infoDescription">
+                —
+            </p>
+        </div>
+
+
+        <button
+            id="focusButton"
+            class="focus-button"
+        >
+            FOCUS CAMERA
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         BOTTOM CONTROL BAR
+    ====================================================== -->
+
+    <div class="control-dock">
+
+        <button
+            id="pauseButton"
+            class="control-button primary"
+        >
+            <span id="pauseIcon">Ⅱ</span>
+            <span id="pauseText">PAUSE</span>
+        </button>
+
+
+        <div class="speed-control">
+
+            <span class="control-label">
+                TIME
+            </span>
+
+            <button data-speed="0.25">0.25×</button>
+            <button data-speed="1">1×</button>
+            <button data-speed="5">5×</button>
+            <button data-speed="20">20×</button>
+            <button data-speed="100">100×</button>
+
+        </div>
+
+
+        <button
+            id="resetCamera"
+            class="control-button"
+        >
+            RESET VIEW
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         SIMULATION HUD
+    ====================================================== -->
+
+    <div class="simulation-hud">
+
+        <div class="hud-row">
+
+            <span>
+                SIMULATION DATE
+            </span>
+
+            <strong id="simulationDate">
+                01 JAN 2026
+            </strong>
+
+        </div>
+
+
+        <div class="hud-row">
+
+            <span>
+                TIME SCALE
+            </span>
+
+            <strong id="simulationSpeed">
+                1×
+            </strong>
+
+        </div>
+
+
+        <div class="hud-row">
+
+            <span>
+                TARGET
+            </span>
+
+            <strong id="targetName">
+                SOLAR SYSTEM
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CROSSHAIR
+    ====================================================== -->
+
+    <div class="crosshair">
+
+        <div class="crosshair-h"></div>
+        <div class="crosshair-v"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         HELP
+    ====================================================== -->
+
+    <div class="help-hint">
+
+        <span>
+            DRAG
+        </span>
+        rotate
+
+        <span>
+            SCROLL
+        </span>
+        zoom
+
+        <span>
+            CLICK
+        </span>
+        select
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN JAVASCRIPT
+    ====================================================== -->
+
+    <script type="module" src="./js/main.js"></script>
+
+</body>
+</html>
