@@ -187,13 +187,16 @@ async function init() {
 
     setTimeout(() => {
 
-        loadingScreen.classList.add("hidden");
+    loadingScreen.style.opacity = "0";
+    loadingScreen.style.pointerEvents = "none";
 
-        animate();
+    setTimeout(() => {
+        loadingScreen.style.display = "none";
+    }, 700);
 
-    }, 500);
-}
+    animate();
 
+}, 500);
 
 /* =========================================================
    LOADING
