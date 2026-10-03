@@ -1043,7 +1043,11 @@ function createSaturnRings(
 
 function createMoons() {
 
-    MOONS.forEach(
+    const moonList = Array.isArray(MOONS)
+        ? MOONS
+        : Object.values(MOONS);
+
+    moonList.forEach(
         moon => {
 
             const geometry =
@@ -1091,7 +1095,6 @@ function createMoons() {
         }
     );
 }
-
 
 /* =========================================================
    ORBIT LINES
